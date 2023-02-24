@@ -6,16 +6,20 @@
 
 namespace mpe {
 
-    struct collider_volume {
-        mars_math::vector3<float> min_extent;
-        mars_math::vector3<float> max_extent;
-    };
+    bool aabb_aabb_collision_check(collider_base* _left, collider_base* _right);
 
     class AABB : public collider_base {
     private:
-        collider_volume volume;
+        collider_volume m_volume;
     public:
+        AABB() : collider_base(typeid(AABB)) { }
 
+        [[nodiscard]] inline collider_volume get_volume() const { return m_volume; }
+
+        void load_from_mesh(mars_loader::mesh_base* _mesh) override;
+
+        void load() override;
+        void mpe_on_collide(collider_base *_other) override;
     };
 }
 
