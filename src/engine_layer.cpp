@@ -2,9 +2,8 @@
 #include <MARS/engine/component.hpp>
 #include <MPE/colliders/collider_base.hpp>
 
-std::pair<mars_engine::engine_layer_component*, mars_engine::engine_layer_component*> mpe::mpe_update_layer_callback(mars_engine::engine_object* _target) {
-    mars_engine::engine_layer_component* result = nullptr;
-    mars_engine::engine_layer_component* tail = nullptr;
+std::vector<mars_engine::engine_layer_component*> mpe::mpe_update_layer_callback(mars_engine::engine_object* _target) {
+    std::vector<mars_engine::engine_layer_component*> list;
 
     for (auto& comp : _target->components()) {
         auto target = dynamic_cast<mpe_layer*>(comp);
@@ -23,9 +22,11 @@ std::pair<mars_engine::engine_layer_component*, mars_engine::engine_layer_compon
             if (collider == nullptr)
                 return;
 
-            while (_current->next != nullptr) {
-                auto next_collider = dynamic_cast<collider_base*>((mpe_layer*)_current->next->target);
-                _current = _current->next;
+            auto next = _current->next;
+
+            while (next != nullptr) {
+                auto next_collider = dynamic_cast<collider_base*>((mpe_layer*)next->target);
+                next = next->next;
 
                 if (next_collider == nullptr)
                     continue;
@@ -35,16 +36,11 @@ std::pair<mars_engine::engine_layer_component*, mars_engine::engine_layer_compon
             }
         };
 
-        if (result == nullptr) {
-            result = new_component;
-            tail = new_component;
-        }
-        else {
-            tail->next = new_component;
-            new_component->previous = tail;
-            tail = new_component;
-        }
+        if (!list.empty())
+            list[list.size() - 1]->next = new_component;
+
+        list.push_back(new_component);
     }
 
-    return { result, tail };
+    return list;
 }

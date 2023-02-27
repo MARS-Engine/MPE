@@ -14,7 +14,7 @@ namespace mpe {
         virtual void mpe_on_collide(collider_base* _other) { }
     };
 
-    std::pair<mars_engine::engine_layer_component*, mars_engine::engine_layer_component*> mpe_update_layer_callback(mars_engine::engine_object* _target);
+    std::vector<mars_engine::engine_layer_component*> mpe_update_layer_callback(mars_engine::engine_object* _target);
 }
 
 #endif
