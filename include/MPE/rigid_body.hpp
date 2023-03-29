@@ -10,11 +10,11 @@ namespace mpe {
     class rigid_body : public mars_engine::component, public mpe_layer {
     private:
         float m_gravity = 9.8f;
-        collider_bridge* m_bridge = nullptr;
+        std::shared_ptr<collider_bridge> m_bridge;
     public:
-        void on_set_object() override;
+        void on_set_object();
         
-        void mpe_update() override;
+        void mpe_update(mars_engine::tick& _tick) override;
     };
 }
 

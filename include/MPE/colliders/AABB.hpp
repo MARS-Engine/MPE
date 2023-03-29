@@ -16,7 +16,7 @@ namespace mpe {
 
         [[nodiscard]] inline collider_volume get_volume() const { return m_volume; }
 
-        void load_from_mesh(mars_loader::mesh_base* _mesh) override;
+        void load_from_mesh(const std::shared_ptr<mars_loader::mesh_base>& _mesh) override;
 
         void load() override;
         void mpe_on_collide(collider_base *_other) override;
