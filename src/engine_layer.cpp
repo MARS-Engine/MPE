@@ -5,7 +5,7 @@
 std::vector<mars_engine::engine_layer_component> mpe::mpe_update_layer_callback(const mars_engine::mars_object& _target) {
     std::vector<mars_engine::engine_layer_component> list;
 
-    for (auto& comp : _target.components()) {
+    for (auto& comp : _target->components()) {
         auto target = dynamic_cast<mpe_layer*>(comp.get());
         if (target == nullptr)
             continue;

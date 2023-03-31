@@ -1,5 +1,4 @@
 #include <MPE/rigid_body.hpp>
-#include <MARS/engine/mars_object.hpp>
 
 using namespace mpe;
 

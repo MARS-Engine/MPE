@@ -32,17 +32,17 @@ namespace mpe {
     class collider_base : public mars_engine::component, public mpe_layer, public mars_layers::load_layer {
        protected:
            mpe_collider_type m_type = MPE_COLLIDER_TYPE_COLLIDER;
-           std::shared_ptr<collider_manager> m_manager = nullptr;
+           std::shared_ptr<collider_manager> m_manager;
            std::type_index m_index = typeid(collider_base);
-           std::shared_ptr<collider_bridge> m_bridge = nullptr;
+           mars_mem::mars_ref<collider_bridge> m_bridge;
        public:
            [[nodiscard]] inline std::type_index get_type_index() const { return m_index; }
 
            explicit collider_base(std::type_index _index) { m_index = _index; }
 
-           inline std::shared_ptr<collider_bridge> get_collider_data() const { return m_bridge; }
+           [[nodiscard]] inline mars_mem::mars_ref<collider_bridge> get_collider_data() const { return m_bridge; }
 
-           void on_set_object() {
+           void on_set_object() override {
                m_bridge = object()->get_bridge<collider_bridge>("collider");
            }
 

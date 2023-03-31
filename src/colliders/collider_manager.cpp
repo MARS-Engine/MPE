@@ -10,4 +10,4 @@ bool collider_manager::check_collision(collider_base *_left, collider_base *_rig
         return false;
 
     return m_collider_callback[pair](_left, _right);
-};
+}
