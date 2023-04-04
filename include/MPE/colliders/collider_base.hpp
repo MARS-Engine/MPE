@@ -34,13 +34,13 @@ namespace mpe {
            mpe_collider_type m_type = MPE_COLLIDER_TYPE_COLLIDER;
            std::shared_ptr<collider_manager> m_manager;
            std::type_index m_index = typeid(collider_base);
-           mars_mem::mars_ref<collider_bridge> m_bridge;
+           mars_ref<collider_bridge> m_bridge;
        public:
            [[nodiscard]] inline std::type_index get_type_index() const { return m_index; }
 
            explicit collider_base(std::type_index _index) { m_index = _index; }
 
-           [[nodiscard]] inline mars_mem::mars_ref<collider_bridge> get_collider_data() const { return m_bridge; }
+           [[nodiscard]] inline mars_ref<collider_bridge> get_collider_data() const { return m_bridge; }
 
            void on_set_object() override {
                m_bridge = object()->get_bridge<collider_bridge>("collider");
@@ -48,7 +48,7 @@ namespace mpe {
 
            void load() override;
 
-           virtual void load_from_mesh(const std::shared_ptr<mars_loader::mesh_base>& _mesh) { }
+           virtual void load_from_mesh(const mars_ref<mars_loader::mesh_base>& _mesh) { }
 
            void set_collider_type(mpe_collider_type _type) { m_type = _type; }
 

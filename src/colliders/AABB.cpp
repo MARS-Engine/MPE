@@ -27,7 +27,7 @@ void AABB::load() {
     m_manager->add_collision_checker<AABB, AABB>(aabb_aabb_collision_check);
 }
 
-void AABB::load_from_mesh(const std::shared_ptr<mars_loader::mesh_base>& _mesh) {
+void AABB::load_from_mesh(const mars_ref<mars_loader::mesh_base>& _mesh) {
     m_volume = {
             _mesh->volume.min_extent,
             _mesh->volume.max_extent

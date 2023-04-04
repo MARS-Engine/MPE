@@ -10,7 +10,7 @@ namespace mpe {
     class rigid_body : public mars_engine::component, public mpe_layer {
     private:
         float m_gravity = 9.8f;
-        mars_mem::mars_ref<collider_bridge> m_bridge;
+        mars_ref<collider_bridge> m_bridge;
     public:
         void on_set_object() override;
         
