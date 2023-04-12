@@ -16,7 +16,6 @@ namespace mpe {
     };
 
     void mpe_update_layer_callback(const mars_engine::layer_component_param& _param);
-    bool mpe_update_layer_validator(const mars_ref<mars_engine::component>& _target, mars_engine::engine_layer_component& _val);
 }
 
 #endif

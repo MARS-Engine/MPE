@@ -24,15 +24,3 @@ void mpe::mpe_update_layer_callback(const mars_engine::layer_component_param &_p
         }
     }
 }
-
-bool mpe::mpe_update_layer_validator(const mars_ref<mars_engine::component> &_target, mars_engine::engine_layer_component &_val) {
-    auto target = dynamic_cast<mpe_layer*>(_target.ptr());
-
-    if (target == nullptr)
-        return false;
-
-    _val.target = target;
-    _val.parent = _target->object().ptr();
-
-    return true;
-}
