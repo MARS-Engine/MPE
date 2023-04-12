@@ -3,6 +3,7 @@
 
 #include <MARS/engine/mars_object.hpp>
 #include <MARS/engine/object_engine.hpp>
+#include <MARS/engine/component.hpp>
 
 namespace mpe {
     class collider_base;
@@ -14,7 +15,8 @@ namespace mpe {
         virtual void mpe_on_collide(collider_base* _other) { }
     };
 
-    std::vector<mars_engine::engine_layer_component> mpe_update_layer_callback(const mars_engine::mars_object& _target);
+    void mpe_update_layer_callback(const mars_engine::layer_component_param& _param);
+    bool mpe_update_layer_validator(const mars_ref<mars_engine::component>& _target, mars_engine::engine_layer_component& _val);
 }
 
 #endif
