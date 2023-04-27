@@ -13,12 +13,12 @@ bool mpe::aabb_aabb_collision_check(collider_base* _left, collider_base* _right)
     rvol *= _right->transform().matrix();
 
     return (
-            lvol.min_extent.x() <= rvol.max_extent.x() &&
-            lvol.max_extent.x() >= rvol.min_extent.x() &&
-            lvol.min_extent.y() <= rvol.max_extent.y() &&
-            lvol.max_extent.y() >= rvol.min_extent.y() &&
-            lvol.min_extent.z() <= rvol.max_extent.z() &&
-            lvol.max_extent.z() >= rvol.min_extent.z()
+            lvol.min_extent.x <= rvol.max_extent.x &&
+            lvol.max_extent.x >= rvol.min_extent.x &&
+            lvol.min_extent.y <= rvol.max_extent.y &&
+            lvol.max_extent.y >= rvol.min_extent.y &&
+            lvol.min_extent.z <= rvol.max_extent.z &&
+            lvol.max_extent.z >= rvol.min_extent.z
             );
 }
 
@@ -48,12 +48,12 @@ void AABB::mpe_on_collide(collider_base *_other) {
     rvol *= _other->transform().matrix();
 
     float distances[6] = {
-            (rvol.max_extent.x() - lvol.min_extent.x()),
-            (lvol.max_extent.x() - rvol.min_extent.x()),
-            (rvol.max_extent.y() - lvol.min_extent.y()),
-            (lvol.max_extent.y() - rvol.min_extent.y()),
-            (rvol.max_extent.z() - lvol.min_extent.z()),
-            (lvol.max_extent.z() - rvol.min_extent.z())
+            (rvol.max_extent.x - lvol.min_extent.x),
+            (lvol.max_extent.x - rvol.min_extent.x),
+            (rvol.max_extent.y - lvol.min_extent.y),
+            (lvol.max_extent.y - rvol.min_extent.y),
+            (rvol.max_extent.z - lvol.min_extent.z),
+            (lvol.max_extent.z - rvol.min_extent.z)
     };
 
     float penetration = FLT_MAX;
