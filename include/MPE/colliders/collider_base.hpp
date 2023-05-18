@@ -43,7 +43,7 @@ namespace mpe {
            [[nodiscard]] inline mars_ref<collider_bridge> get_collider_data() const { return m_bridge; }
 
            void on_set_object() override {
-               m_bridge = object()->get_bridge<collider_bridge>("collider");
+               m_bridge = object()->get<collider_bridge>("collider");
            }
 
            void load() override;

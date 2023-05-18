@@ -1,7 +1,6 @@
 #ifndef MPE_COLLIDER_BRIDGE_
 #define MPE_COLLIDER_BRIDGE_
 
-#include <MARS/engine/object_bridge.hpp>
 #include <MARS/math/vector3.hpp>
 #include <MARS/engine/object_engine.hpp>
 #include <MARS/engine/bridge.hpp>

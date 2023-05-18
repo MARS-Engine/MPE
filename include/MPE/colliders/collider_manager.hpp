@@ -22,18 +22,12 @@ namespace mpe {
         template<typename A, typename B> void add_collision_checker(const std::function<bool(collider_base*, collider_base*)>& _callback) {
             auto pair = std::pair(std::type_index(typeid(A)), std::type_index(typeid(B)));
 
-            //cheap check to see if already exists since 99% of the time it will already exist
-            if (m_collider_callback.contains(pair))
+            auto check = m_collider_callback.lock();
+
+            if (check->contains(pair))
                 return;
 
-            //expensive check because it needs to lock to make 100% sure it doesn't already exist
-            m_collider_callback.lock();
-
-            if (m_collider_callback.contains(pair))
-                return m_collider_callback.unlock();
-
-            m_collider_callback.insert(std::pair(pair, _callback));
-            m_collider_callback.unlock();
+            check->insert(std::pair(pair, _callback));
         }
     };
 }

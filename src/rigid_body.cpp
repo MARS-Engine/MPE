@@ -3,7 +3,7 @@
 using namespace mpe;
 
 void rigid_body::on_set_object() {
-    m_bridge = object()->get_bridge<collider_bridge>("collider");
+    m_bridge = object()->get<collider_bridge>("collider");
 }
 
 void rigid_body::mpe_update(mars_engine::tick& _tick) {
