@@ -3,10 +3,8 @@
 #include <MPE/colliders/collider_base.hpp>
 
 void mpe::mpe_update_layer_callback(mars_engine::layer_component_param&& _param) {
-    auto start = _param.layers->begin() + _param.being;
-    auto end = _param.layers->end();
-    for (auto ptr = start; ptr < start + _param.length && ptr < end; ptr++) {
-        auto target = static_cast<mpe_layer*>(ptr->target);
+    for (auto i = 0; i < _param.length && i + _param.being < _param.layers->size(); i++) {
+        auto target = static_cast<mpe_layer*>(_param.layers->at(i + _param.being).target);
         target->mpe_update(*_param.layer_tick);
 
         auto collider = dynamic_cast<collider_base*>(target);
@@ -14,8 +12,8 @@ void mpe::mpe_update_layer_callback(mars_engine::layer_component_param&& _param)
         if (collider == nullptr)
             return;
 
-        for (auto ptr2 = ptr + 1; ptr2 < end; ptr2++) {
-            auto next_collider = dynamic_cast<collider_base*>(static_cast<mpe_layer*>(ptr2->target));
+        for (auto i2 = i + _param.being + 1; i2 < _param.layers->size(); i2++) {
+            auto next_collider = dynamic_cast<collider_base*>(static_cast<mpe_layer*>(_param.layers->at(i2).target));
 
             if (next_collider == nullptr)
                 continue;
