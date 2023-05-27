@@ -2,10 +2,11 @@
 #define MPE_COLLIDER_MANAGER_
 
 #include <MARS/engine/singleton.hpp>
-#include <pl/safe_map.hpp>
+#include <pl/safe.hpp>
 #include <functional>
 #include <set>
 #include <typeindex>
+#include <map>
 
 namespace mpe {
 
@@ -13,7 +14,7 @@ namespace mpe {
 
     class collider_manager : public mars_engine::singleton {
     private:
-        pl::safe_map<std::pair<std::type_index, std::type_index>, std::function<bool(collider_base*, collider_base*)>> m_collider_callback;
+        pl::safe<std::map<std::pair<std::type_index, std::type_index>, std::function<bool(collider_base*, collider_base*)>>> m_collider_callback;
     public:
         using mars_engine::singleton::singleton;
 
